@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-mock-data
+      author: antigravity
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: "SELECT COUNT(*) FROM vehicle"
+      changes:
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: {name: license_plate, value: "KA-01-HH-1234"}
+              - column: {name: capacity, valueNumeric: 1000.0}
+              - column: {name: status, value: "AVAILABLE"}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: {name: license_plate, value: "KA-05-MJ-5678"}
+              - column: {name: capacity, valueNumeric: 2000.0}
+              - column: {name: status, value: "IN_USE"}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+
+        - insert:
+            tableName: driver
+            columns:
+              - column: {name: name, value: "Ramesh Kumar"}
+              - column: {name: license_number, value: "DL-1234567890"}
+              - column: {name: status, value: "ACTIVE"}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+        - insert:
+            tableName: driver
+            columns:
+              - column: {name: name, value: "Suresh Singh"}
+              - column: {name: license_number, value: "DL-0987654321"}
+              - column: {name: status, value: "INACTIVE"}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+
+        - insert:
+            tableName: product
+            columns:
+              - column: {name: name, value: "Premium Diesel"}
+              - column: {name: type, value: "DIESEL"}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+        - insert:
+            tableName: product
+            columns:
+              - column: {name: name, value: "Regular Petrol"}
+              - column: {name: type, value: "PETROL"}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+
+        - insert:
+            tableName: inventory
+            columns:
+              - column: {name: location_id, valueNumeric: 1}
+              - column: {name: location_type, value: "HUB"}
+              - column: {name: product_id, valueNumeric: 1}
+              - column: {name: quantity, valueNumeric: 5000.0}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+        - insert:
+            tableName: inventory
+            columns:
+              - column: {name: location_id, valueNumeric: 2}
+              - column: {name: location_type, value: "TERMINAL"}
+              - column: {name: product_id, valueNumeric: 2}
+              - column: {name: quantity, valueNumeric: 10000.0}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+
+        - insert:
+            tableName: gps_log
+            columns:
+              - column: {name: vehicle_id, valueNumeric: 1}
+              - column: {name: latitude, valueNumeric: 12.9716}
+              - column: {name: longitude, valueNumeric: 77.5946}
+              - column: {name: timestamp, valueDate: "2023-10-26T10:05:00"}
+              - column: {name: created_at, valueDate: "2023-10-26T10:05:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:05:00"}

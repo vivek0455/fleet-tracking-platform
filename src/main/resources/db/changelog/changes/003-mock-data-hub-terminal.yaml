@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-mock-data-hub-terminal
+      author: antigravity
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: "SELECT COUNT(*) FROM hub"
+      changes:
+        - insert:
+            tableName: hub
+            columns:
+              - column: {name: id, valueNumeric: 1}
+              - column: {name: name, value: "Central Hub"}
+              - column: {name: address, value: "123 Main St, Bangalore"}
+              - column: {name: latitude, valueNumeric: 12.9716}
+              - column: {name: longitude, valueNumeric: 77.5946}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
+
+        - insert:
+            tableName: terminal
+            columns:
+              - column: {name: id, valueNumeric: 2}
+              - column: {name: name, value: "North Terminal"}
+              - column: {name: address, value: "456 North Rd, Bangalore"}
+              - column: {name: latitude, valueNumeric: 13.0000}
+              - column: {name: longitude, valueNumeric: 77.6000}
+              - column: {name: created_at, valueDate: "2023-10-26T10:00:00"}
+              - column: {name: updated_at, valueDate: "2023-10-26T10:00:00"}
