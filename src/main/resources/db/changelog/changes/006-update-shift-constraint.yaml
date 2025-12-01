@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-update-shift-status-constraint
+      author: system
+      changes:
+        - sql:
+            sql: ALTER TABLE shift DROP CONSTRAINT IF EXISTS shift_status_check;
+        - sql:
+            sql: ALTER TABLE shift ADD CONSTRAINT shift_status_check CHECK (status IN ('SCHEDULED', 'ACTIVE', 'COMPLETED'));

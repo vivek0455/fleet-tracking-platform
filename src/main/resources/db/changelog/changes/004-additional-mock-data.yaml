@@ -1,0 +1,242 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-additional-drivers
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM driver WHERE id > 2
+      changes:
+        - insert:
+            tableName: driver
+            columns:
+              - column: { name: name, value: "Vijay Sharma" }
+              - column: { name: license_number, value: "DL-1122334455" }
+              - column: { name: status, value: "ACTIVE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: driver
+            columns:
+              - column: { name: name, value: "Amit Patel" }
+              - column: { name: license_number, value: "DL-2233445566" }
+              - column: { name: status, value: "ACTIVE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: driver
+            columns:
+              - column: { name: name, value: "Rajesh Kumar" }
+              - column: { name: license_number, value: "DL-3344556677" }
+              - column: { name: status, value: "ACTIVE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: driver
+            columns:
+              - column: { name: name, value: "Priya Desai" }
+              - column: { name: license_number, value: "DL-4455667788" }
+              - column: { name: status, value: "ACTIVE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: driver
+            columns:
+              - column: { name: name, value: "Arun Reddy" }
+              - column: { name: license_number, value: "DL-5566778899" }
+              - column: { name: status, value: "INACTIVE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: driver
+            columns:
+              - column: { name: name, value: "Kavita Singh" }
+              - column: { name: license_number, value: "DL-6677889900" }
+              - column: { name: status, value: "ACTIVE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+
+  - changeSet:
+      id: 004-additional-vehicles
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM vehicle WHERE id > 2
+      changes:
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: { name: license_plate, value: "KA-02-AB-1111" }
+              - column: { name: capacity, valueNumeric: 1500.0 }
+              - column: { name: status, value: "AVAILABLE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: { name: license_plate, value: "KA-03-CD-2222" }
+              - column: { name: capacity, valueNumeric: 2500.0 }
+              - column: { name: status, value: "AVAILABLE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: { name: license_plate, value: "KA-04-EF-3333" }
+              - column: { name: capacity, valueNumeric: 1800.0 }
+              - column: { name: status, value: "IN_USE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: { name: license_plate, value: "KA-06-GH-4444" }
+              - column: { name: capacity, valueNumeric: 3000.0 }
+              - column: { name: status, value: "AVAILABLE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: { name: license_plate, value: "KA-07-IJ-5555" }
+              - column: { name: capacity, valueNumeric: 2200.0 }
+              - column: { name: status, value: "AVAILABLE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: vehicle
+            columns:
+              - column: { name: license_plate, value: "KA-08-KL-6666" }
+              - column: { name: capacity, valueNumeric: 1600.0 }
+              - column: { name: status, value: "IN_USE" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+
+  - changeSet:
+      id: 004-additional-locations
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM hub WHERE id > 1
+      changes:
+        - insert:
+            tableName: hub
+            columns:
+              - column: { name: name, value: "South Hub" }
+              - column: { name: address, value: "789 South Ave, Bangalore" }
+              - column: { name: latitude, valueNumeric: 12.9141 }
+              - column: { name: longitude, valueNumeric: 77.6411 }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: hub
+            columns:
+              - column: { name: name, value: "East Hub" }
+              - column: { name: address, value: "321 East Rd, Bangalore" }
+              - column: { name: latitude, valueNumeric: 12.9822 }
+              - column: { name: longitude, valueNumeric: 77.6476 }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+
+  - changeSet:
+      id: 004-additional-terminals
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM terminal WHERE id >= 3
+      changes:
+        - insert:
+            tableName: terminal
+            columns:
+              - column: { name: name, value: "West Terminal" }
+              - column: { name: address, value: "555 West St, Bangalore" }
+              - column: { name: latitude, valueNumeric: 12.9611 }
+              - column: { name: longitude, valueNumeric: 77.5388 }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: terminal
+            columns:
+              - column: { name: name, value: "Central Terminal" }
+              - column: { name: address, value: "111 Central Blvd, Bangalore" }
+              - column: { name: latitude, valueNumeric: 12.9698 }
+              - column: { name: longitude, valueNumeric: 77.5980 }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+
+  - changeSet:
+      id: 004-additional-products
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM product WHERE id >= 3
+      changes:
+        - insert:
+            tableName: product
+            columns:
+              - column: { name: name, value: "Super Diesel" }
+              - column: { name: type, value: "DIESEL" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+        - insert:
+            tableName: product
+            columns:
+              - column: { name: name, value: "Premium Petrol" }
+              - column: { name: type, value: "PETROL" }
+              - column: { name: created_at, valueDate: "2023-10-26T10:00:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T10:00:00" }
+
+  - changeSet:
+      id: 004-gps-logs
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM gps_log WHERE vehicle_id IN (3, 4, 5, 6, 7, 8)
+      changes:
+        - insert:
+            tableName: gps_log
+            columns:
+              - column: { name: vehicle_id, valueNumeric: 3 }
+              - column: { name: latitude, valueNumeric: 12.9352 }
+              - column: { name: longitude, valueNumeric: 77.6245 }
+              - column: { name: timestamp, valueDate: "2023-10-26T11:30:00" }
+              - column: { name: created_at, valueDate: "2023-10-26T11:30:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T11:30:00" }
+        - insert:
+            tableName: gps_log
+            columns:
+              - column: { name: vehicle_id, valueNumeric: 4 }
+              - column: { name: latitude, valueNumeric: 12.9456 }
+              - column: { name: longitude, valueNumeric: 77.5789 }
+              - column: { name: timestamp, valueDate: "2023-10-26T11:35:00" }
+              - column: { name: created_at, valueDate: "2023-10-26T11:35:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T11:35:00" }
+        - insert:
+            tableName: gps_log
+            columns:
+              - column: { name: vehicle_id, valueNumeric: 5 }
+              - column: { name: latitude, valueNumeric: 12.9789 }
+              - column: { name: longitude, valueNumeric: 77.6123 }
+              - column: { name: timestamp, valueDate: "2023-10-26T11:40:00" }
+              - column: { name: created_at, valueDate: "2023-10-26T11:40:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T11:40:00" }
+        - insert:
+            tableName: gps_log
+            columns:
+              - column: { name: vehicle_id, valueNumeric: 6 }
+              - column: { name: latitude, valueNumeric: 12.9234 }
+              - column: { name: longitude, valueNumeric: 77.5567 }
+              - column: { name: timestamp, valueDate: "2023-10-26T11:45:00" }
+              - column: { name: created_at, valueDate: "2023-10-26T11:45:00" }
+              - column: { name: updated_at, valueDate: "2023-10-26T11:45:00" }

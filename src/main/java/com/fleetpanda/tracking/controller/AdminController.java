@@ -47,6 +47,11 @@ public class AdminController {
         return ResponseEntity.ok(adminService.getAllProducts());
     }
 
+    @GetMapping("/inventory")
+    public ResponseEntity<List<Inventory>> getAllInventory() {
+        return ResponseEntity.ok(adminService.getAllInventory());
+    }
+
     @PostMapping("/drivers")
     public ResponseEntity<Driver> createDriver(@RequestBody DriverDTO dto) {
         return ResponseEntity.ok(adminService.createDriver(dto));
@@ -80,5 +85,20 @@ public class AdminController {
     @PostMapping("/orders")
     public ResponseEntity<Order> createOrder(@RequestBody OrderDTO dto) {
         return ResponseEntity.ok(adminService.createOrder(dto));
+    }
+
+    @GetMapping("/shifts")
+    public ResponseEntity<List<Shift>> getAllShifts() {
+        return ResponseEntity.ok(adminService.getAllShifts());
+    }
+
+    @GetMapping("/fleet-status")
+    public ResponseEntity<List<GpsLog>> getFleetStatus() {
+        return ResponseEntity.ok(adminService.getFleetStatus());
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<List<Order>> getAllOrders() {
+        return ResponseEntity.ok(adminService.getAllOrders());
     }
 }

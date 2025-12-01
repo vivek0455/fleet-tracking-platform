@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-sample-allocations
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM vehicle_allocation
+      changes:
+        - insert:
+            tableName: vehicle_allocation
+            columns:
+              - column: { name: driver_id, valueNumeric: 1 }
+              - column: { name: vehicle_id, valueNumeric: 1 }
+              - column: { name: date, valueDate: "2025-11-29" }
+              - column: { name: created_at, valueDate: "2025-11-29T10:00:00" }
+              - column: { name: updated_at, valueDate: "2025-11-29T10:00:00" }
+        - insert:
+            tableName: vehicle_allocation
+            columns:
+              - column: { name: driver_id, valueNumeric: 3 }
+              - column: { name: vehicle_id, valueNumeric: 3 }
+              - column: { name: date, valueDate: "2025-11-29" }
+              - column: { name: created_at, valueDate: "2025-11-29T10:00:00" }
+              - column: { name: updated_at, valueDate: "2025-11-29T10:00:00" }
+        - insert:
+            tableName: vehicle_allocation
+            columns:
+              - column: { name: driver_id, valueNumeric: 4 }
+              - column: { name: vehicle_id, valueNumeric: 4 }
+              - column: { name: date, valueDate: "2025-11-29" }
+              - column: { name: created_at, valueDate: "2025-11-29T10:00:00" }
+              - column: { name: updated_at, valueDate: "2025-11-29T10:00:00" }
+
+  - changeSet:
+      id: 005-sample-shifts
+      author: system
+      preConditions:
+        onFail: MARK_RAN
+        sqlCheck:
+          expectedResult: 0
+          sql: SELECT COUNT(*) FROM shift
+      changes:
+        - insert:
+            tableName: shift
+            columns:
+              - column: { name: driver_id, valueNumeric: 1 }
+              - column: { name: vehicle_id, valueNumeric: 1 }
+              - column: { name: status, value: "SCHEDULED" }
+              - column: { name: created_at, valueDate: "2025-11-29T10:00:00" }
+              - column: { name: updated_at, valueDate: "2025-11-29T10:00:00" }
+        - insert:
+            tableName: shift
+            columns:
+              - column: { name: driver_id, valueNumeric: 3 }
+              - column: { name: vehicle_id, valueNumeric: 3 }
+              - column: { name: status, value: "SCHEDULED" }
+              - column: { name: created_at, valueDate: "2025-11-29T10:00:00" }
+              - column: { name: updated_at, valueDate: "2025-11-29T10:00:00" }
+        - insert:
+            tableName: shift
+            columns:
+              - column: { name: driver_id, valueNumeric: 4 }
+              - column: { name: vehicle_id, valueNumeric: 4 }
+              - column: { name: status, value: "SCHEDULED" }
+              - column: { name: created_at, valueDate: "2025-11-29T10:00:00" }
+              - column: { name: updated_at, valueDate: "2025-11-29T10:00:00" }

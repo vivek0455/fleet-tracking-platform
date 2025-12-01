@@ -5,3 +5,9 @@ databaseChangeLog:
       file: db/changelog/changes/002-mock-data.yaml
   - include:
       file: db/changelog/changes/003-mock-data-hub-terminal.yaml
+  - include:
+      file: db/changelog/changes/004-additional-mock-data.yaml
+  - include:
+      file: db/changelog/changes/006-update-shift-constraint.yaml
+  - include:
+      file: db/changelog/changes/005-sample-allocations-shifts.yaml

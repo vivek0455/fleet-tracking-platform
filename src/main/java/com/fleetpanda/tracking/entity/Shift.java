@@ -26,6 +26,6 @@ public class Shift extends BaseEntity {
     private ShiftStatus status;
 
     public enum ShiftStatus {
-        ACTIVE, COMPLETED
+        SCHEDULED, ACTIVE, COMPLETED
     }
 }

@@ -32,13 +32,27 @@ public class DriverService {
             throw new RuntimeException("Driver already has an active shift");
         }
 
-        // Check for vehicle allocation for today
-        VehicleAllocation allocation = allocationRepository.findByDriverIdAndDate(driverId, LocalDate.now())
-                .orElseThrow(() -> new RuntimeException("No vehicle allocated for today"));
+        // Find SCHEDULED shift for today (or just the latest scheduled one?)
+        // Ideally we should link it to the allocation date, but for now let's find any
+        // SCHEDULED shift for this driver
+        // Or better, find by Driver and Status SCHEDULED.
+        // If multiple, maybe pick the one for today?
+        // Let's assume one scheduled shift at a time for simplicity or find the one
+        // created by allocation.
 
-        Shift shift = new Shift();
-        shift.setDriver(allocation.getDriver());
-        shift.setVehicle(allocation.getVehicle());
+        // Since we didn't store date in Shift (only startTime/endTime), we rely on the
+        // one created by allocation.
+        // But allocation has date. Shift doesn't have a "scheduled date" field, only
+        // startTime/endTime.
+        // We should probably add `scheduledDate` to Shift or just use `createdAt` or
+        // assume it's the one.
+
+        // For now, let's find the first SCHEDULED shift.
+        Shift shift = shiftRepository.findByDriverIdAndStatus(driverId, Shift.ShiftStatus.SCHEDULED)
+                .stream().findFirst()
+                .orElseThrow(
+                        () -> new RuntimeException("No scheduled shift found. Ask Admin to allocate vehicle first."));
+
         shift.setStartTime(LocalDateTime.now());
         shift.setStatus(Shift.ShiftStatus.ACTIVE);
 

@@ -23,6 +23,8 @@ public class AdminService {
     private final VehicleAllocationRepository allocationRepository;
     private final OrderRepository orderRepository;
     private final ShiftRepository shiftRepository;
+    private final InventoryRepository inventoryRepository;
+    private final GpsLogRepository gpsLogRepository;
 
     // Hubs
     public Hub createHub(HubDTO dto) {
@@ -64,6 +66,11 @@ public class AdminService {
         return productRepository.findAll();
     }
 
+    // Inventory
+    public List<Inventory> getAllInventory() {
+        return inventoryRepository.findAll();
+    }
+
     // Drivers
     public Driver createDriver(DriverDTO dto) {
         Driver driver = new Driver();
@@ -95,12 +102,16 @@ public class AdminService {
     public VehicleAllocation allocateVehicle(VehicleAllocationDTO dto) {
         // Check if vehicle is already allocated for the day
         if (allocationRepository.findByVehicleIdAndDate(dto.getVehicleId(), dto.getDate()).isPresent()) {
-            throw new RuntimeException("Vehicle is already allocated for this date");
+            Vehicle vehicle = vehicleRepository.findById(dto.getVehicleId()).orElse(null);
+            String plate = vehicle != null ? vehicle.getLicensePlate() : "ID " + dto.getVehicleId();
+            throw new RuntimeException("Vehicle " + plate + " is already allocated for " + dto.getDate());
         }
 
         // Check if driver is already allocated for the day
         if (allocationRepository.findByDriverIdAndDate(dto.getDriverId(), dto.getDate()).isPresent()) {
-            throw new RuntimeException("Driver is already allocated for this date");
+            Driver driver = driverRepository.findById(dto.getDriverId()).orElse(null);
+            String name = driver != null ? driver.getName() : "ID " + dto.getDriverId();
+            throw new RuntimeException("Driver " + name + " is already allocated for " + dto.getDate());
         }
 
         Driver driver = driverRepository.findById(dto.getDriverId())
@@ -113,7 +124,17 @@ public class AdminService {
         allocation.setVehicle(vehicle);
         allocation.setDate(dto.getDate());
 
-        return allocationRepository.save(allocation);
+        allocationRepository.save(allocation);
+
+        // Create SCHEDULED Shift
+        Shift shift = new Shift();
+        shift.setDriver(driver);
+        shift.setVehicle(vehicle);
+        shift.setStatus(Shift.ShiftStatus.SCHEDULED);
+        // We don't set startTime yet
+        shiftRepository.save(shift);
+
+        return allocation;
     }
 
     public List<VehicleAllocation> getAllocations(LocalDate date) {
@@ -154,5 +175,31 @@ public class AdminService {
         order.setStatus(Order.OrderStatus.PENDING);
 
         return orderRepository.save(order);
+    }
+
+    // Shifts
+    public List<Shift> getAllShifts() {
+        return shiftRepository.findAll();
+    }
+
+    // Fleet Status
+    public List<GpsLog> getFleetStatus() {
+        // Ideally use a custom query to get latest log per vehicle
+        // For simplicity, let's just return all logs or last 100?
+        // Or fetch all vehicles and find their latest log?
+        // Let's try to find latest log for each vehicle.
+        // Since we don't have a custom query ready, let's just return all logs for now
+        // (not efficient but works for mock data)
+        // Or better:
+        List<Vehicle> vehicles = vehicleRepository.findAll();
+        return vehicles.stream()
+                .map(vehicle -> gpsLogRepository.findTopByVehicleOrderByTimestampDesc(vehicle).orElse(null))
+                .filter(java.util.Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    // Orders
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
     }
 }
