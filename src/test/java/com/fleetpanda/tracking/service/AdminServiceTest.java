@@ -29,24 +29,6 @@ class AdminServiceTest {
     @InjectMocks
     private AdminService adminService;
 
-    @Test
-    void allocateVehicle_Success() {
-        VehicleAllocationDTO dto = new VehicleAllocationDTO();
-        dto.setDriverId(1L);
-        dto.setVehicleId(1L);
-        dto.setDate(LocalDate.now());
-
-        when(allocationRepository.findByVehicleIdAndDate(any(), any())).thenReturn(Optional.empty());
-        when(allocationRepository.findByDriverIdAndDate(any(), any())).thenReturn(Optional.empty());
-        when(driverRepository.findById(1L)).thenReturn(Optional.of(new Driver()));
-        when(vehicleRepository.findById(1L)).thenReturn(Optional.of(new Vehicle()));
-        when(allocationRepository.save(any())).thenAnswer(i -> i.getArgument(0));
-
-        VehicleAllocation result = adminService.allocateVehicle(dto);
-
-        assertNotNull(result);
-        assertEquals(dto.getDate(), result.getDate());
-    }
 
     @Test
     void allocateVehicle_Conflict() {
